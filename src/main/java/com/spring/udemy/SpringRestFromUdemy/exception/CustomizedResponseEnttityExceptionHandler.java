@@ -11,6 +11,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.spring.udemy.SpringRestFromUdemy.User.UserNotFoundException;
+import com.spring.udemy.SpringRestFromUdemy.User.ValueNotFoundException;
 
 @ControllerAdvice
 @RestController
@@ -34,6 +35,16 @@ public class CustomizedResponseEnttityExceptionHandler extends ResponseEntityExc
 						ex.getMessage(), 
 						request.getDescription(false));
 		return new ResponseEntity(response, HttpStatus.NOT_FOUND);
+
+	}
+	@ExceptionHandler(ValueNotFoundException.class)
+	public final ResponseEntity<Object> handleValueNotFOundException(ValueNotFoundException ex, WebRequest request) throws Exception {
+
+		ExceptionResponse response = 
+				new ExceptionResponse(new Date(),
+						ex.getMessage(), 
+						request.getDescription(false));
+		return new ResponseEntity(response, HttpStatus.UNPROCESSABLE_ENTITY);
 
 	}
 

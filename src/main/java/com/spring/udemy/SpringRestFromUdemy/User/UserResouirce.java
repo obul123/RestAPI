@@ -42,6 +42,21 @@ public class UserResouirce {
 	// POST/users
 	@RequestMapping(method = RequestMethod.POST, path = "/users")
 	public ResponseEntity<Object> createUser(@RequestBody User user) {
+		if(user.getDob()==null )
+		{
+			System.out.println("Print somehting 1");
+			throw new ValueNotFoundException("DOB is - "+user.getDob());
+		}
+		if(user.getId()==null )
+		{
+			System.out.println("Print somehting 2 ");
+			throw new ValueNotFoundException("Id is - "+user.getId());
+		}
+		if( user.getName()==null )
+		{
+			System.out.println("Print somehting 3");
+			throw new ValueNotFoundException("Name is - "+user.getName());
+		}
 		User savedUser = doa.createOne(user);
 		/*
 		 * 1.Return status as Created 
