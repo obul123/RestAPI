@@ -2,10 +2,17 @@ package com.spring.udemy.SpringRestFromUdemy.User;
 
 import java.util.Date;
 
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
 public class User {
 
 	private Integer Id;
+	
+	@Size(min = 2 , message = "Lenght should be of size min 2")
 	private String name;
+	
+	@Past(message = "the date should be less than the current date")
 	private Date dob;
 
 	public User(Integer id, String name, Date dob) {
