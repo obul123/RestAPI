@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+
 public class User {
 
 	private Integer Id;

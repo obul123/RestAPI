@@ -53,5 +53,19 @@ public class DaoUser {
 		}	
 		return null;
 	}
+	public User UpdateUser(User user, int id) {
+		// TODO Auto-generated method stub
+		for(User u:users)
+		{
+			if(u.getId()==id)
+			{
+				users.set(users.indexOf(u), user);
+				return user;
+			}
+		}
+		return null;
+	}
 
 }
+
+	

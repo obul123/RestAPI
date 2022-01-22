@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 public class UserResouirce {
 
@@ -27,12 +29,14 @@ public class UserResouirce {
 	 */
 
 	// GET/users/
+	@Operation(summary = "Get Users" , description = "Get  All users" , tags = "User Operations")
 	@RequestMapping(method = RequestMethod.GET, path = "/users")
 	public List<User> getAll() {
 		return doa.getAll();
 	}
 
 	// GET/users/{id}
+	@Operation(summary= " Get One user" , description = "Get One user ", tags = "User Operations")
 	@RequestMapping(method = RequestMethod.GET, path = "/users/{id}")
 	public User getOneuser(@PathVariable int id) {
 		User unser = doa.GetOneUser(id);
@@ -43,6 +47,7 @@ public class UserResouirce {
 	}
 
 	// POST/users
+	@Operation(summary="Create user ",description="Create an user" , tags="User Operations")
 	@RequestMapping(method = RequestMethod.POST, path = "/users")
 	public ResponseEntity<Object> createUser(@Valid @RequestBody User user) {
 		/*
@@ -70,6 +75,7 @@ public class UserResouirce {
 	}
 	
 	//Delete a user
+	@Operation(summary="Delete a user ",description="Delete an user",tags="User Operations")
 	@DeleteMapping(path="/users/{id}")
 	public void DeleteUser(@PathVariable int id)
 	{
@@ -80,4 +86,16 @@ public class UserResouirce {
 		}
 	}
 	
+	@Operation(summary= "Update User" , description =" Delete User",tags = "User Operations")
+	@RequestMapping(method=RequestMethod.PUT , path="/users/{id}")
+	public User updateUser(@RequestBody User user,@PathVariable("id") int id)
+	{
+		User u=doa.UpdateUser(user,id);
+		if(u==null)
+		{
+			throw new UserNotFoundException("id - "+id);
+		}
+		
+		return u;
+	}
 }
